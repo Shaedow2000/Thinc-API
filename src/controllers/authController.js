@@ -148,7 +148,7 @@ const reset_password_verification = wrapper(async (req, res) => {
   }
 
   const code = crypto.randomInt(100000, 999999).toString();
-  const expiry = new Date(Data.now(), 10 * 60 * 1000);
+  const expiry = new Date(Date.now() + 10 * 60 * 1000);
 
   await AccountModel.findOneAndUpdate(
     { email },
@@ -293,7 +293,7 @@ const deleteAccountRequest = wrapper(async (req, res) => {
     const isUser = await bcrypt.compare(password, user.password);
     if (isUser) {
       const code = crypto.randomInt(100000, 999999).toString();
-      const expiry = new Date(Date.now(), 10 * 60 * 1000);
+      const expiry = new Date(Date.now() + 10 * 60 * 1000);
 
       await AccountModel.findOneAndUpdate(
         { email },
