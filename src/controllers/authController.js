@@ -198,7 +198,7 @@ const reset_password = wrapper(async (req, res) => {
     });
 
   const salt = 10;
-  const new_hashed_password = bcrypt.hash(password, salt);
+  const new_hashed_password = await bcrypt.hash(password, salt);
 
   await AccountModel.findOneAndUpdate(
     { email },
