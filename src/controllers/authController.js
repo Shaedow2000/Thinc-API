@@ -147,14 +147,6 @@ const reset_password_verification = wrapper(async (req, res) => {
     });
   }
 
-  if (!user.abilityToChangePassword) {
-    return res.status(403).json({
-      status: 403,
-      message: "Account not found",
-      account: null,
-    });
-  }
-
   const code = crypto.randomInt(100000, 999999).toString();
   const expiry = new Date(Data.now(), 10 * 60 * 1000);
 
