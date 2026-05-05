@@ -20,10 +20,10 @@ publicRouter.post("/register", register);
 publicRouter.post("/verify", verification);
 publicRouter.post("/reverify", resend_code);
 publicRouter.post("/reset_verification", reset_password_verification);
+publicRouter.post("/abort", abortChangingPassword);
 
 publicRouter.patch("/password_reset", reset_password);
 
-publicRouter.get("/user/:id", abortChangingPassword);
 publicRouter.get("/tokenAuth", tokenAuth);
 
 publicRouter.post("/unregister", deleteAccountRequest);

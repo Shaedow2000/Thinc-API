@@ -219,8 +219,8 @@ const reset_password = wrapper(async (req, res) => {
 });
 
 const abortChangingPassword = wrapper(async (req, res) => {
-  const id = req.params.id;
-  const user = await AccountModel.findById(id);
+  const { email } = req.body;
+  const user = await AccountModel.findOne({ email });
 
   if (!user)
     return res.status(404).json({
@@ -236,8 +236,12 @@ const abortChangingPassword = wrapper(async (req, res) => {
     });
 
   await AccountModel.findOneAndUpdate(
-    { _id: id },
-    { abilityToChangePassword: false },
+    { email },
+    {
+      abilityToChangePassword: false,
+      verificationCode: null,
+      verificationExpiry: null,
+    },
   );
 
   return res.status(202).json({
