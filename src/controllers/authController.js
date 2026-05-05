@@ -71,7 +71,7 @@ const verification = wrapper(async (req, res) => {
       message: "Verification code exipred",
     });
 
-  const verifiedAccount = await AccountModel.findOneAndUpdate(
+  await AccountModel.findOneAndUpdate(
     { email },
     { isVerified: true, verificationCode: null, verificationExpiry: null },
   );
@@ -84,10 +84,19 @@ const verification = wrapper(async (req, res) => {
 
   await sendWelcomeEmail(user.username, user.email);
 
+  const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+    expiresIn: "1y",
+  });
+
   return res.status(201).json({
     status: 201,
     message: "Account created successfully!",
-    account: verifiedAccount,
+    account: {
+      _id: verifiedAccount._id,
+      username: verifiedAccount.username,
+      email: verifiedAccount.email,
+    },
+    token: token,
   });
 });
 
@@ -312,7 +321,7 @@ const deleteAccountRequest = wrapper(async (req, res) => {
     return res.status(404).json({
       status: 404,
       message: "Account not found",
-      account: undefined,
+      account: null,
     });
   }
 });
