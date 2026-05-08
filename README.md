@@ -29,16 +29,16 @@ Thinc WebApp notes API source code, with account management and authentication f
 
 #### /api:
 
-**/tasks**
+**/notes**
 
-- **GET**: Get all tasks for specific user using the JWT token.
-- **POST**: Post a new task for a specific user.
+- **GET**: Get all notes for specific user using the JWT token.
+- **POST**: Post a new notes for a specific user.
 
 **/task/:id**
 
-- **GET**: Get one task by mongodb ObjectId.
-- **PATCH**: Update one task by mongodb ObjectId.
-- **DELETE**: Delte one task by mongodb ObjectId.
+- **GET**: Get one note by mongodb ObjectId.
+- **PATCH**: Update one note by mongodb ObjectId.
+- **DELETE**: Delte one note by mongodb ObjectId.
 
 ### Email verification
 
